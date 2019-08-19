@@ -1,0 +1,19 @@
+# https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
+# https://github.com/aws-samples/lambda-go-samples/blob/master/buildspec.yml
+
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      golang: 1.12
+
+  build:
+    commands:
+      # Target MacOS AMD64.
+      # https://dave.cheney.net/2015/08/22/cross-compilation-with-go-1-5
+      - env GOOS=darwin GOARCH=amd64 go build -v -o main
+
+artifacts:
+  files:
+    main
